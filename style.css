@@ -1,0 +1,1102 @@
+@import url("https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap");
+/* ==========================================================================
+   CSS RESET — https://www.joshwcomeau.com/css/custom-css-reset/
+   ========================================================================== */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+*:not(dialog) {
+  margin: 0;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    interpolate-size: allow-keywords;
+  }
+}
+
+body {
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  overflow-wrap: break-word;
+}
+
+p {
+  text-wrap: pretty;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  text-wrap: balance;
+}
+
+#root,
+#__next {
+  isolation: isolate;
+}
+
+/* ==========================================================================
+   VARIABLES
+   ========================================================================== */
+
+:root {
+  --main-bg: oklch(22% 0.018 264);
+  --card-bg: oklch(26% 0.018 264);
+  --card-border-color: oklch(35% 0.018 264);
+  --accent-main: oklch(78% 0.13 78);
+  --accent-alt: oklch(44% 0.18 25);
+  --heading-color: oklch(100% 0 0);
+  --body-text: oklch(93% 0.008 264);
+  --small-text: oklch(67% 0.02 264);
+  --heading-font: "Courier New", Courier, monospace;
+  --body-font: "Libre Baskerville", Georgia, serif;
+  --container: 1200px;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding: 4rem;
+}
+
+/* ==========================================================================
+   HEADER & NAV
+   ========================================================================== */
+
+header {
+  width: 100%;
+  position: fixed;
+  top: 0;
+  padding: clamp(0.5rem, 1vw + 0.2rem, 1rem) clamp(1rem, 2vw + 0.5rem, 3rem);
+  z-index: 1000;
+  min-height: clamp(60px, 10vh, 85px);
+  align-content: center;
+  background: transparent;
+  border-bottom: 1px solid transparent;
+  transition:
+    background 0.3s ease,
+    border-color 0.3s ease;
+  animation: header-bg linear both;
+  animation-timeline: scroll(root);
+  animation-range: 0dvh 100dvh;
+}
+
+@keyframes header-bg {
+  0% {
+    background: transparent;
+    border-bottom-color: transparent;
+  }
+  10%,
+  100% {
+    background: var(--card-bg);
+    border-bottom-color: var(--card-border-color);
+  }
+}
+
+nav {
+  max-width: var(--container);
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo-text img {
+  width: clamp(70px, 11vw, 90px);
+  height: auto;
+}
+
+.menu {
+  display: flex;
+  flex-wrap: nowrap;
+  max-width: var(--container);
+  align-items: center;
+  gap: clamp(0.35rem, 1vw, 0.8rem);
+  list-style: none;
+
+  & a {
+    text-decoration: none;
+    padding: 0.8rem 1rem;
+    font-family: var(--body-font);
+    font-size: clamp(0.9rem, 0.9vw, 1.05rem);
+    font-weight: 600;
+    color: var(--accent-main);
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.8);
+    transition: 0.5s;
+    border: 3px solid transparent;
+  }
+
+  & a:hover {
+    color: var(--heading-color);
+    border-color: var(--accent-main);
+  }
+}
+
+.menu-toggle {
+  display: none;
+}
+
+.hamburger {
+  display: none;
+  width: clamp(40px, 6vw, 45px);
+  height: clamp(40px, 6vw, 45px);
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  border: 2px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.06);
+  cursor: pointer;
+
+  & span,
+  & span::before,
+  & span::after {
+    display: block;
+    width: 18px;
+    height: 2px;
+    background: #fff;
+    position: relative;
+    content: "";
+    transition:
+      transform 0.25s ease,
+      top 0.25s ease,
+      background 0.25s ease;
+    transform-origin: center;
+  }
+
+  & span::before {
+    position: absolute;
+    top: -6px;
+  }
+
+  & span::after {
+    position: absolute;
+    top: 6px;
+  }
+}
+
+/* ==========================================================================
+   HERO
+   ========================================================================== */
+
+.hero-background-img {
+  background-image: url(public/hero-bg-english.png);
+  background-size: cover;
+  background-position: 30% center;
+  background-repeat: no-repeat;
+  width: 100%;
+  min-height: 100dvh;
+  position: relative;
+}
+
+.hero-background-img::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to right,
+    oklch(22% 0.018 264 / 0.5) 0%,
+    oklch(22% 0.018 264 / 0.4) 35%,
+    oklch(22% 0.018 264 / 0.1) 60%,
+    transparent 100%
+  );
+  pointer-events: none;
+}
+
+.hero-background-img > * {
+  position: relative;
+  z-index: 1;
+}
+
+.hero-content {
+  display: grid;
+  grid-template-columns: 65ch 2fr;
+  align-items: center;
+  justify-items: start;
+  height: 100dvh;
+  max-width: var(--container);
+  margin: 0 auto;
+  padding-top: clamp(60px, 10vh, 85px);
+}
+
+.hero-text {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(1rem, 2vh, 1.5rem);
+  max-width: 550px;
+  backdrop-filter: blur(9px);
+  -webkit-backdrop-filter: blur(9px);
+  padding: clamp(1.5rem, 3vw, 2.5rem);
+  border-radius: 5%;
+  text-shadow:
+    0 2px 20px rgba(0, 0, 0, 0.9),
+    0 0 40px rgba(0, 0, 0, 0.7);
+}
+
+.hero-eyebrow {
+  font-family: var(--body-font);
+  font-size: clamp(0.65rem, 0.8vw, 0.78rem);
+  font-weight: 600;
+  color: var(--accent-main);
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+}
+
+.hero-title {
+  font-family: var(--heading-font);
+  font-size: clamp(2rem, 4vw + 0.5rem, 3rem);
+  font-weight: 700;
+  color: var(--heading-color);
+  line-height: 1.05;
+  text-shadow:
+    0 2px 20px rgba(0, 0, 0, 0.9),
+    0 0 40px rgba(0, 0, 0, 0.7);
+}
+
+.hero-accent {
+  color: var(--accent-main);
+}
+
+.hero-subtitle {
+  font-family: var(--body-font);
+  font-size: clamp(0.85rem, 1vw, 0.95rem);
+  color: var(--body-text);
+  line-height: 1.7;
+  text-shadow: 0 1px 10px rgba(0, 0, 0, 0.9);
+}
+
+.hero-stat {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 1.5rem;
+  background: rgba(39, 40, 56, 0.5);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-left: 4px solid var(--accent-main);
+  border-radius: 0 8px 8px 0;
+  max-width: fit-content;
+}
+
+.stat-number {
+  font-family: var(--heading-font);
+  font-size: clamp(1.6rem, 3vw, 2.4rem);
+  font-weight: 700;
+  color: var(--accent-main);
+  line-height: 1;
+}
+
+.stat-label {
+  font-family: var(--body-font);
+  font-size: clamp(0.72rem, 0.9vw, 0.82rem);
+  color: var(--body-text);
+  line-height: 1.4;
+}
+
+.hero-btn {
+  display: inline-block;
+  text-decoration: none;
+  padding: 0.9rem 2rem;
+  background: var(--accent-main);
+  color: #1a1a1a;
+  font-family: var(--body-font);
+  font-size: clamp(0.75rem, 0.9vw, 0.88rem);
+  font-weight: 700;
+  border-radius: 50px;
+  transition: 0.3s ease;
+  align-self: flex-start;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.hero-btn:hover {
+  background: var(--heading-color);
+  color: #1a1a1a;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(246, 174, 45, 0.3);
+}
+
+/* ==========================================================================
+   BODY & TYPOGRAPHY
+   ========================================================================== */
+
+body {
+  background-color: var(--main-bg);
+  min-height: 100dvh;
+  overflow-x: hidden;
+  font-family: var(--body-font);
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+h1 {
+  font-size: clamp(1.6rem, 4vw + 0.5rem, 2.8rem);
+  color: var(--heading-color);
+  font-weight: 700;
+  font-family: var(--heading-font);
+}
+
+h2 {
+  font-size: clamp(1.2rem, 2.5vw + 0.3rem, 1.6rem);
+  color: var(--heading-color);
+  font-weight: 700;
+  font-family: var(--heading-font);
+}
+
+p {
+  font-size: clamp(0.85rem, 0.9vw + 0.1rem, 0.95rem);
+  font-weight: 400;
+  color: var(--body-text);
+}
+
+/* ==========================================================================
+   SHARED SECTION PATTERNS
+   ========================================================================== */
+
+.section {
+  width: 100%;
+  padding: clamp(4rem, 8vw, 8rem) clamp(1rem, 2vw + 0.5rem, 3rem);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(3rem, 6vw, 5rem);
+}
+
+.intro {
+  max-width: 700px;
+  width: 100%;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.eyebrow {
+  font-family: var(--body-font);
+  font-size: clamp(0.65rem, 0.8vw, 0.78rem);
+  font-weight: 600;
+  color: var(--accent-main);
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+}
+
+.lead {
+  font-family: var(--body-font);
+  font-size: clamp(0.85rem, 1vw, 0.95rem);
+  color: var(--small-text);
+  line-height: 1.7;
+}
+
+/* ==========================================================================
+   PROBLEM
+   ========================================================================== */
+
+#problem {
+  background: var(--main-bg);
+}
+
+#problem .stats {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: var(--container);
+  background: var(--card-bg);
+  border: 1px solid var(--card-border-color);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+#problem .stats > div {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 0.75rem;
+  padding: clamp(2rem, 4vw, 3rem);
+}
+
+#problem .stats > div > span {
+  font-family: var(--heading-font);
+  font-size: clamp(2.4rem, 5vw, 4rem);
+  font-weight: 700;
+  color: var(--accent-main);
+  line-height: 1;
+}
+
+#problem .stats > div > p {
+  font-size: clamp(0.78rem, 0.9vw, 0.88rem);
+  color: var(--small-text);
+  line-height: 1.6;
+  max-width: 200px;
+}
+
+#problem hr {
+  width: 1px;
+  height: 80px;
+  background: var(--card-border-color);
+  border: none;
+  flex-shrink: 0;
+}
+
+/* ==========================================================================
+   EVIDENCE
+   ========================================================================== */
+
+#evidence {
+  background: var(--card-bg);
+  gap: clamp(4rem, 8vw, 6rem);
+}
+
+.evidence-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: clamp(2rem, 4vw, 4rem);
+  width: 100%;
+  max-width: var(--container);
+}
+
+.evidence-row-reverse .card {
+  order: 2;
+}
+
+.evidence-row-reverse .evidence-text {
+  order: 1;
+}
+
+.evidence-text {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.evidence-text > p:first-child {
+  font-size: clamp(0.75rem, 1vw, 0.9rem);
+  font-weight: 600;
+  color: var(--accent-main);
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+}
+
+.evidence-text h3 {
+  font-family: var(--heading-font);
+  font-size: clamp(1.1rem, 1.8vw, 1.5rem);
+  color: var(--heading-color);
+  line-height: 1.3;
+}
+
+.evidence-text > p:nth-child(3) {
+  font-size: clamp(0.82rem, 1vw, 0.92rem);
+  color: var(--body-text);
+  line-height: 1.7;
+}
+
+.evidence-source {
+  font-size: 0.72rem;
+  color: var(--small-text);
+  font-style: italic;
+}
+
+#evidence .card {
+  height: 320px;
+  justify-self: center;
+  max-width: 360px;
+  width: 100%;
+}
+
+/* ==========================================================================
+   CARDS
+   ========================================================================== */
+
+.card {
+  width: 100%;
+  height: 280px;
+  background: var(--card-bg);
+  transition: all 0.4s ease;
+  border-radius: 12px;
+  border: 1px solid var(--card-border-color);
+  box-shadow: 0px 0px 10px 5px oklch(0% 0 0 / 0.3);
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+.card:hover {
+  transform: scale(1.03);
+  box-shadow: 0px 0px 20px 8px oklch(76% 0.16 75 / 0.15);
+  background: var(--main-bg);
+  border-color: var(--accent-main);
+}
+
+.first-content {
+  position: absolute;
+  inset: 0;
+  transition: all 0.4s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  opacity: 1;
+  padding: clamp(1.5rem, 3vw, 2rem);
+  text-align: center;
+  transform: rotate(0deg);
+}
+.first-content::after {
+  content: "Hover to reveal";
+  position: absolute;
+  bottom: 1rem;
+  font-size: 8px;
+  font-weight: 600;
+  color: var(--small-text);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  opacity: 1;
+}
+
+@keyframes hint-fade {
+  0% {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  30% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  70% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+}
+@media (hover: hover) {
+  .first-content::after {
+    content: "Hover to reveal";
+    position: absolute;
+    bottom: 1rem;
+    font-size: 8px;
+    font-weight: 600;
+    color: var(--small-text);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    opacity: 1;
+  }
+
+  .card:hover .first-content::after {
+    display: none;
+  }
+}
+
+.card:hover .first-content::after {
+  display: none;
+}
+
+.card:hover .first-content {
+  opacity: 0;
+  transform: rotate(-90deg) scale(0);
+}
+
+.second-content {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 12px;
+  transition: all 0.4s ease;
+  padding: clamp(1.5rem, 3vw, 2rem);
+  transform: rotate(90deg) scale(-1);
+  border-left: 4px solid var(--accent-main);
+  text-align: center;
+}
+
+.card:hover .second-content {
+  opacity: 1;
+  transform: rotate(0deg);
+  background: oklch(26% 0.018 264 / 0.95);
+}
+
+.first-content h2 {
+  font-family: var(--heading-font);
+  font-size: clamp(1rem, 1.8vw, 1.4rem);
+  color: var(--heading-color);
+}
+
+.second-content p {
+  font-size: clamp(0.78rem, 0.9vw, 0.9rem);
+  color: var(--body-text);
+  line-height: 1.7;
+}
+
+.card-toggle {
+  display: none;
+}
+
+.card-btn {
+  display: none;
+}
+
+@media (hover: none) {
+  .card-btn {
+    display: inline-block;
+    margin-top: 1rem;
+    padding: 0.6rem 1.5rem;
+    background: var(--accent-main);
+    color: #1a1a1a;
+    font-size: 0.85rem;
+    font-weight: 700;
+    border-radius: 50px;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    transition: background 0.2s ease;
+    border: none;
+  }
+
+  .card-btn:hover {
+    background: var(--heading-color);
+  }
+
+  .card-toggle:checked ~ .first-content {
+    opacity: 0;
+    transform: rotate(-90deg) scale(0);
+    position: absolute;
+    pointer-events: none;
+  }
+
+  .card-toggle:checked ~ .second-content {
+    opacity: 1;
+    transform: rotate(0deg);
+    background: oklch(26% 0.018 264 / 0.95);
+  }
+}
+
+/* ==========================================================================
+   TRUTH
+   ========================================================================== */
+
+#truth {
+  background: var(--main-bg);
+}
+
+#truth .intro h2 span {
+  color: var(--accent-alt);
+}
+
+.truth-list {
+  width: 100%;
+  max-width: var(--container);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(1rem, 2vw, 1.5rem);
+  align-items: stretch;
+}
+
+.truth-item {
+  display: flex;
+  gap: clamp(0.75rem, 2vw, 1.25rem);
+  padding: clamp(1.5rem, 3vw, 2rem);
+  background: var(--card-bg);
+  border: 1px solid var(--card-border-color);
+  border-radius: 12px;
+  height: 100%;
+}
+
+.truth-item > span {
+  font-family: var(--heading-font);
+  font-size: clamp(1.4rem, 2.5vw, 2rem);
+  font-weight: 700;
+  color: var(--card-border-color);
+  line-height: 1;
+  min-width: 2.5rem;
+  flex-shrink: 0;
+  padding-top: 4px;
+}
+
+.truth-item > div {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  justify-content: space-between;
+}
+
+.truth-item > div > div:first-child {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  padding-bottom: 1.25rem;
+  border-bottom: 1px solid var(--card-border-color);
+}
+
+.truth-item > div > div:first-child > p:first-child {
+  font-size: clamp(0.65rem, 0.9vw, 0.78rem);
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--small-text);
+}
+
+.truth-item > div > div:first-child > p:last-child {
+  font-size: clamp(0.82rem, 1vw, 0.92rem);
+  color: var(--small-text);
+  line-height: 1.6;
+  font-style: italic;
+}
+
+.truth-item > div > div:last-child {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  padding-left: clamp(0.75rem, 1.5vw, 1rem);
+  border-left: 2px solid var(--accent-main);
+}
+
+.truth-item > div > div:last-child > p:first-child {
+  font-size: clamp(0.65rem, 0.9vw, 0.78rem);
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent-main);
+}
+
+.truth-item > div > div:last-child > p:nth-child(2) {
+  font-size: clamp(0.82rem, 1vw, 0.92rem);
+  color: var(--body-text);
+  line-height: 1.7;
+}
+
+.truth-item strong {
+  font-family: var(--heading-font);
+  font-size: clamp(1.1rem, 2vw, 1.5rem);
+  font-weight: 700;
+  color: var(--accent-main);
+}
+
+.truth-item > div > div:last-child > p:last-child {
+  font-size: 0.75rem;
+  color: var(--small-text);
+  font-style: italic;
+  margin-top: 0.5rem;
+}
+
+/* ==========================================================================
+   CHANGE
+   ========================================================================== */
+
+#change {
+  background: var(--card-bg);
+}
+
+.change-closing {
+  max-width: 680px;
+  padding: clamp(2rem, 4vw, 3rem);
+  border: 1px solid var(--card-border-color);
+  border-left: 4px solid var(--accent-main);
+  border-radius: 0 12px 12px 0;
+}
+
+.change-closing p {
+  font-family: var(--heading-font);
+  font-size: clamp(0.88rem, 1.3vw, 1.05rem);
+  color: var(--body-text);
+  line-height: 1.8;
+  font-style: italic;
+}
+
+/* ==========================================================================
+   REFERENCES
+   ========================================================================== */
+
+#references {
+  background: var(--main-bg);
+}
+.ref-section {
+  margin: clamp(2rem, 8vw, 2rem) clamp(1rem, 2vw + 0.5rem, 3rem);
+}
+
+#references .intro {
+  max-width: var(--container);
+  text-align: left;
+}
+
+.ref-list {
+  width: 100%;
+  max-width: var(--container);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.ref-list p {
+  font-size: clamp(0.78rem, 0.9vw, 0.88rem);
+  color: var(--small-text);
+  line-height: 1.7;
+  padding-left: 2rem;
+  text-indent: -2rem;
+}
+
+.ref-list a {
+  color: var(--accent-main);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: color 0.2s ease;
+}
+
+.ref-list a:hover {
+  color: var(--heading-color);
+}
+
+/* ==========================================================================
+   FOOTER
+   ========================================================================== */
+
+footer {
+  width: 100%;
+  border-top: 1px solid var(--card-border-color);
+}
+
+.maintain {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: clamp(1rem, 2vw + 0.5rem, 3rem);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(1rem, 2vw + 0.5rem, 2rem);
+}
+
+.menu-footer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5rem 1.5rem;
+  list-style: none;
+  padding: 0;
+
+  & a {
+    text-decoration: none;
+    color: var(--small-text);
+    font-size: 0.9rem;
+    transition: 0.2s;
+  }
+
+  & a:hover {
+    color: var(--heading-color);
+  }
+}
+
+.footer-head {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  border-top: 1px solid var(--card-border-color);
+  padding-top: 1rem;
+  width: 100%;
+
+  & img {
+    width: 70px;
+  }
+
+  & p {
+    color: var(--small-text);
+    font-size: 0.85rem;
+  }
+}
+
+/* ==========================================================================
+   RESPONSIVE
+   ========================================================================== */
+@media (width > 1140px) {
+  .card-btn {
+    display: none;
+  }
+}
+@media (max-width: 1140px) {
+  header {
+    left: 0;
+    width: 100%;
+  }
+
+  header:has(.menu-toggle:checked) {
+    background: rgba(39, 40, 56, 0.4);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom-color: var(--card-border-color);
+  }
+  .first-content::after {
+    content: "";
+  }
+
+  .logo-text img {
+    width: clamp(55px, 15vw, 90px);
+  }
+
+  .hero-background-img {
+    background-position: 30% center;
+  }
+
+  .menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    align-items: center;
+    gap: clamp(0.25rem, 1vh, 0.5rem);
+    background: transparent;
+    max-height: 0;
+    padding: 0;
+    opacity: 0;
+    pointer-events: none;
+    transition:
+      max-height 0.3s ease,
+      opacity 0.3s ease,
+      padding 0.3s ease;
+
+    & li {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 90%;
+      border-bottom: 1px solid var(--card-border-color);
+    }
+
+    & li,
+    & a {
+      padding: 1vh 0;
+      background: transparent;
+    }
+  }
+
+  .menu a:hover {
+    border-color: transparent;
+  }
+
+  .menu-toggle:checked ~ .menu {
+    max-height: 100dvh;
+    padding: 0;
+    opacity: 1;
+    pointer-events: auto;
+    background: var(--card-bg);
+  }
+
+  .hamburger {
+    display: flex;
+  }
+
+  .menu-toggle:checked ~ .hamburger span {
+    background: transparent;
+  }
+
+  .menu-toggle:checked ~ .hamburger span::before {
+    top: 0;
+    transform: rotate(45deg);
+  }
+
+  .menu-toggle:checked ~ .hamburger span::after {
+    top: 0;
+    transform: rotate(-45deg);
+  }
+}
+
+@media (max-width: 1250px) {
+  .hero-content {
+    padding: 0 clamp(1rem, 2vw + 0.5rem, 3rem);
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding-top: clamp(60px, 10vh, 85px);
+    padding-bottom: clamp(3rem, 8vh, 5rem);
+    height: 100dvh;
+  }
+
+  .hero-text {
+    align-items: center;
+  }
+
+  .hero-stat {
+    max-width: 100%;
+    justify-content: center;
+  }
+
+  .hero-btn {
+    align-self: center;
+  }
+
+  #problem .stats {
+    flex-direction: column;
+  }
+
+  #problem hr {
+    width: 80%;
+    height: 1px;
+  }
+
+  .evidence-row {
+    grid-template-columns: 1fr;
+  }
+
+  #evidence .card {
+    max-width: 100%;
+    height: 280px;
+  }
+
+  .truth-list {
+    grid-template-columns: 1fr;
+  }
+
+  .change-closing {
+    text-align: left;
+  }
+}
