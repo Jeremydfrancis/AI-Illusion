@@ -688,12 +688,16 @@ p {
     font-size: 0.85rem;
     font-weight: 700;
     border-radius: 50px;
-    cursor: pointer;
+    cursor: pointer; 
+    -webkit-tap-highlight-color: transparent; 
+    touch-action: manipulation; 
     text-transform: uppercase;
     letter-spacing: 0.08em;
     transition: background 0.2s ease;
     border: none;
+    user-select: none; 
   }
+}
 
   .card-btn:hover {
     background: var(--heading-color);
